@@ -102,7 +102,7 @@ router.push("/")
   return (
     <div className="min-h-screen bg-black text-white flex flex-col gap-16 p-12">
       <div className="text-center justify-around flex ">
-        <div className="text-sm">Welcome, {user.email} :)</div>
+        <div className="text-sm font-mono">Welcome, {user.email.slice(0, user.email.length - 10)} :)</div>
         <div>
             <button onClick={handleLogout} className="bg-red-500 text-white px-2 py-1 text-sm rounded-2xl cursor-pointer">Logout</button>
         </div>
