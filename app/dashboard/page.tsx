@@ -148,7 +148,7 @@ router.push("/")
               >
                 Open URL
               </a>
-              <button onClick={(e) => deleteBookmark(item.id)} className="text-sm px-3 py-2 cursor-pointer bg-red-600 rounded-2xl">Delete</button>
+              <button onClick={() => deleteBookmark(item.id)} className="text-sm px-3 py-2 cursor-pointer bg-red-600 rounded-2xl">Delete</button>
               </div>
             </div>
           )): <p>Add Your First Bookmark... </p>}
