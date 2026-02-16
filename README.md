@@ -6,7 +6,7 @@ This application allows users to sign in with Google, add bookmarks, and see upd
 ---
 
 ## 🚀 Live Demo
-I will add vercel link here
+(https://abstrabit-bookmark-app-sigma.vercel.app/)
 ---
 
 ## 🛠 Tech Stack
@@ -129,7 +129,7 @@ npm run dev
 ---
 
 ## 🌍 Deployment
-
+(https://abstrabit-bookmark-app-sigma.vercel.app/)
 ---
 
 ## 👤 Author
