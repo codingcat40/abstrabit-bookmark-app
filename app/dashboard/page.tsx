@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react"
 import { supabase } from "../lib/supabase"
+import { useRouter } from "next/navigation"
 
 export default function Dashboard() {
   const [user, setUser] = useState<any>(null)
@@ -9,6 +10,9 @@ export default function Dashboard() {
   const [url, setUrl] = useState("")
   const [bookmarks, setBookmarks] = useState<any[]>([])
   const [loading, setLoading] = useState(true)
+
+
+  const router = useRouter()
 
   // fetching bookmarks
   const fetchBookmarks = async (userId: string) => {
@@ -42,6 +46,23 @@ export default function Dashboard() {
       fetchBookmarks(currentUser.id)
     }
   }
+
+
+//   delete bookmark
+
+const deleteBookmark = async (id: string) => {
+    await supabase.from("bookmarks").delete().eq("id", id)
+}
+
+
+// User Logout
+
+const handleLogout = async () => {
+await supabase.auth.signOut()
+router.push("/")
+
+}
+
 
   useEffect(() => {
     let channel: any
@@ -80,8 +101,11 @@ export default function Dashboard() {
 
   return (
     <div className="min-h-screen bg-black text-white flex flex-col gap-16 p-12">
-      <div className="text-center text-xl">
-        Welcome, {user.email} :)
+      <div className="text-center justify-around flex ">
+        <div className="text-sm">Welcome, {user.email} :)</div>
+        <div>
+            <button onClick={handleLogout} className="bg-red-500 text-white px-2 py-1 text-sm rounded-2xl cursor-pointer">Logout</button>
+        </div>
       </div>
 
       <div className="max-w-3xl mx-auto w-full space-y-10">
@@ -113,7 +137,7 @@ export default function Dashboard() {
 
         
         <div className="flex flex-col gap-4">
-          {bookmarks.map((item: any) => (
+          {bookmarks.length > 0 ? bookmarks.map((item: any) => (
             <div key={item.id} className="bg-zinc-900 p-4 rounded flex justify-between">
               <p className="text-gray-300">{item.title}</p>
               <div className="flex gap-6">
@@ -124,10 +148,10 @@ export default function Dashboard() {
               >
                 Open URL
               </a>
-              <button className="text-sm px-3 py-2 bg-red-600 rounded-2xl">Delete</button>
+              <button onClick={(e) => deleteBookmark(item.id)} className="text-sm px-3 py-2 cursor-pointer bg-red-600 rounded-2xl">Delete</button>
               </div>
             </div>
-          ))}
+          )): <p>Add Your First Bookmark... </p>}
         </div>
       </div>
     </div>

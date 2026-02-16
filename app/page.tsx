@@ -1,14 +1,17 @@
 "use client"
 import { supabase } from "./lib/supabase";
 
-
 export default function Home() {
-
   // functionality for login 
   const loginWithGoogle = async () =>  {
     await supabase.auth.signInWithOAuth({
       provider: "google",
-    })
+      options:  {
+        redirectTo:  `${window.location.origin}/dashboard`
+      }
+    },
+  )
+    
   }
 
   return (
